@@ -6,5 +6,6 @@ app.listen(3000, function() {
 })
 
 app.get('/', (req, res) => {
-  res.send('hello world by adApp')
+  //console.log("directory " + __dirname);
+  res.sendFile(__dirname+'/index.html')
 })
