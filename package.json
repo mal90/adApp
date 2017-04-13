@@ -1,0 +1,19 @@
+{
+  "name": "adapp",
+  "version": "1.0.0",
+  "description": "an app using nodejs , angular",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mal90/adApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mal90/adApp/issues"
+  },
+  "homepage": "https://github.com/mal90/adApp#readme"
+}
