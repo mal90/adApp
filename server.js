@@ -9,3 +9,7 @@ app.get('/', (req, res) => {
   //console.log("directory " + __dirname);
   res.sendFile(__dirname+'/index.html')
 })
+
+app.post('/quotes', (req, res) => {
+  console.log('Hellooooooooooooooooo!')
+})

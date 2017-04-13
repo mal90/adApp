@@ -3,8 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>adApp</title>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    .topmargin{
+        margin-top: 50px;
+    }
+</style>    
 </head>
 <body>
-  Done using expressjss
+  <div class="container topmargin">
+      <div class="col-md-12">
+          <div class="panel panel-info">
+            <div class="panel-heading">Require quotation</div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <form action="/quotes" method="POST">
+                            <div class="form-group">
+                                <label for="customer">Customer:</label>
+                                <input type="text" class="form-control" id="customer">
+                            </div>
+                            <div class="form-group">
+                                <label for="customer">Type of Ad:</label>
+                                <input type="text" class="form-control" id="customer">
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                    </div>    
+                </div>
+            </div>
+      </div>
+  </div>
 </body>
 </html>
