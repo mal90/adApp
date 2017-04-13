@@ -11,8 +11,10 @@ var dbName = CONFIG.dbname;
 
 var URL='mongodb://'+userName+':'+passWord+'@ds161190.mlab.com:61190/'+dbName;
 console.log(URL);
+
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 
 MongoClient.connect(URL, (err, database) => {
   if (err) 
@@ -29,7 +31,16 @@ MongoClient.connect(URL, (err, database) => {
 //   //res.sendFile(__dirname+'/index.html')
 // })
 
-app.post('/quotes', (req, res) => {
+app.post('/quote/add', (req, res) => {
   console.log(req.body);
   res.end();
+})
+
+app.post('/product/add', (req, res) => {
+    db.collection('products').save(req.body, (err, result) => {
+    if (err)
+     return console.log(err);
+    console.log('saved to database');
+    res.end();
+  })
 })

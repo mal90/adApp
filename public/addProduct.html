@@ -10,24 +10,27 @@
         }
     </style>    
 </head>
-<body ng-app="adApp" ng-controller="quoteCtrl">
+<body ng-app="adApp" ng-controller="productCtrl">
   <div class="container topmargin">
       <div class="col-md-12">
           <div class="panel panel-info">
-            <div class="panel-heading">Require quotation</div>
+            <div class="panel-heading">Add Product</div>
                 <div class="panel-body">
                     <div class="col-md-6">
-                        <form action="/quotes" method="POST">
+                        <form>
                             <div class="form-group">
-                                <label for="customer">Customer:</label>
-                                <input type="text" class="form-control" id="customer" name="customer">
+                                <label for="id">ID:</label>
+                                <input type="text" ng-model="id" class="form-control" id="id" name="id">
                             </div>
                             <div class="form-group">
-                                <label for="ad">Type of Ad:</label>
-                                <input type="text" class="form-control" id="ad" name="ad">
+                                <label for="name">Name:</label>
+                                <input type="text" ng-model="name" class="form-control" id="name" name="name">
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                            <a type="button" href="addProduct.html" class="btn btn-default pull-right">Add Product</a>
+                            <div class="form-group">
+                                <label for="price">Price:</label>
+                                <input type="text" ng-model="price" class="form-control" id="price" name="price">
+                            </div>
+                            <button type="submit" ng-click="addProduct()" class="btn btn-default">Add product</button>
                         </form>
                     </div>    
                 </div>
