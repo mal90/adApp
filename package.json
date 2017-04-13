@@ -19,7 +19,8 @@
   "homepage": "https://github.com/mal90/adApp#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "mongodb": "^2.2.25"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
