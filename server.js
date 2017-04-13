@@ -36,6 +36,14 @@ app.post('/quote/add', (req, res) => {
   res.end();
 })
 
+app.get('/products', (req, res) => {
+    db.collection('products').find().toArray(function(err, results) {
+    console.log(results)
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(results));
+    })
+})
+
 app.post('/product/add', (req, res) => {
     db.collection('products').save(req.body, (err, result) => {
     if (err)
