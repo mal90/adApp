@@ -9,7 +9,7 @@ app.controller("dashboardCtrl", function($scope) {
 });
 
 app.controller("quoteCtrl", function($scope) {
-    $scope.adTypes = ["Classic", "Standout", "Premium"];
+
 });
 
 app.controller("productCtrl", function($scope, $http) {
@@ -44,8 +44,9 @@ app.controller("productCtrl", function($scope, $http) {
         $http.post('/product/add', product).
         success(function(data) {
             console.log("product added successfully");
-            $scope.products.push(product);
+            getAllProducts();
         }).error(function(data) {
+            alert("Product id is mandatory!");
             console.error("error in adding product");
         })
     }

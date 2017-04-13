@@ -1,9 +1,11 @@
 const express = require('express');
-const MongoClient = require('mongodb').MongoClient
-const bodyParser= require('body-parser')
+const MongoClient = require('mongodb').MongoClient;
+const mongodb = require('mongodb');
+const bodyParser= require('body-parser');
 const app = express();
-var CONFIG = require('./public/config.json');
 var db;
+var CONFIG = require('./public/config.json');
+
 
 var userName = CONFIG.uname;
 var passWord = CONFIG.pword;
@@ -45,10 +47,25 @@ app.get('/products', (req, res) => {
 })
 
 app.post('/product/add', (req, res) => {
-    db.collection('products').save(req.body, (err, result) => {
-    if (err)
-     return console.log(err);
-    console.log('saved to database');
-    res.end();
-  })
+    db.collection('products').find({id:req.body.id}).toArray(function(err, result) {
+        console.log(result);
+        if(result.length == 0){
+            db.collection('products').save(req.body, (err, result) => {
+            if (err)
+                return console.log(err);
+            console.log('saved to database');
+            res.end();
+            })
+        }else{
+            db.collection('products', function(err, collection) {
+                collection.remove({id: req.body.id});
+                db.collection('products').save(req.body, (err, result) => {
+                    if (err)
+                        return console.log(err);
+                    console.log('exisiting ad updated in the database');
+                    res.end();
+                })
+            });
+        }
+    })
 })
