@@ -98,8 +98,8 @@ app.controller("checkoutCtrl", function ($scope, $http) {
             if ($scope.customerName === "UNILEVER") {
                 if (addedItem.id === 'classic') {
                     if (addedItem.numberOfItems >= 2) {
-                        addedItem.numberOfItems = parseFloat(addedItem.numberOfItems);
-                        totalPrice = (parseFloat($scope.numberOfItems) -1) * parseFloat(addedItem.price);
+                        addedItem.numberOfItems = parseFloat(addedItem.numberOfItems)+1;
+                        totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
                         addedItem.discountApplied = true;
                     }
                 }
@@ -122,12 +122,28 @@ app.controller("checkoutCtrl", function ($scope, $http) {
                 }
             }
             else if ($scope.customerName === 'FORD') {
-
+                if (addedItem.id === 'classic') {
+                    if (addedItem.numberOfItems >= 4) {
+                        addedItem.numberOfItems = parseFloat(addedItem.numberOfItems)+1;
+                        totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
+                        addedItem.discountApplied = true;
+                    }
+                }
+                if (addedItem.id === 'standout') {
+                    addedItem.price = 309.99; 
+                    totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price); 
+                    addedItem.discountApplied = true;
+                }
+                if (addedItem.id === 'premium') {
+                    if (addedItem.numberOfItems >= 3) {
+                        addedItem.numberOfItems = parseFloat(addedItem.numberOfItems);
+                        addedItem.price = 389.99; 
+                        totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
+                        addedItem.discountApplied = true;
+                    }
+                }
             }
-            else {
-
-            }
-
+            
             totalPrice = totalPrice === addedItem.totalPrice ? parseFloat($scope.numberOfItems) * parseFloat(addedItem.price) : totalPrice;
             return totalPrice;
         }
