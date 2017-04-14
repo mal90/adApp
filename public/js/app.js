@@ -18,6 +18,7 @@ app.controller("checkoutCtrl", function ($scope, $http) {
     $scope.adTypes = [];
     $scope.addItem = addItem;
     $scope.changeCustomer = changeCustomer;
+    $scope.removeItem = removeItem;
     $scope.totalAddedItems = [];
     var customerSelected;
     getAllProducts();
@@ -57,17 +58,21 @@ app.controller("checkoutCtrl", function ($scope, $http) {
             return false;
         }
 
+        var dublicateItem = false;
         $scope.totalAddedItems.forEach(function (addedItem, index) {
             if ($scope.selectedProduct != undefined && $scope.selectedProduct != null &&
                 addedItem.name === $scope.selectedProduct.name) {
                 var confirmOverWright = confirm("Do you want to overwright the current entry under the same Ad type ? Click OK to proceed");
                 if (confirmOverWright) {
                     $scope.totalAddedItems.splice(index, 1);
+                }else{
+                    dublicateItem = true;
                 }
             }
         });
 
-        addToCheckoutList();
+        if(!dublicateItem)
+            addToCheckoutList();
     }
 
     function addToCheckoutList() {
@@ -96,7 +101,7 @@ app.controller("checkoutCtrl", function ($scope, $http) {
             if ($scope.customerName === "UNILEVER") {
                 if (addedItem.id === 'classic') {
                     if (addedItem.numberOfItems >= 2) {
-                        addedItem.numberOfItems = parseFloat(addedItem.numberOfItems)+1;
+                        addedItem.numberOfItems = parseFloat(addedItem.numberOfItems) + 1;
                         totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
                         addedItem.discountApplied = true;
                     }
@@ -104,16 +109,16 @@ app.controller("checkoutCtrl", function ($scope, $http) {
             }
             else if ($scope.customerName === 'APPLE') {
                 if (addedItem.id === 'standout') {
-                   addedItem.price = 299.99; 
-                   totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price); 
-                   addedItem.discountApplied = true;
+                    addedItem.price = 299.99;
+                    totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
+                    addedItem.discountApplied = true;
                 }
             }
             else if ($scope.customerName === 'NIKE') {
                 if (addedItem.id === 'premium') {
                     if (addedItem.numberOfItems >= 4) {
                         addedItem.numberOfItems = parseFloat(addedItem.numberOfItems);
-                        addedItem.price = 379.99; 
+                        addedItem.price = 379.99;
                         totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
                         addedItem.discountApplied = true;
                     }
@@ -122,29 +127,39 @@ app.controller("checkoutCtrl", function ($scope, $http) {
             else if ($scope.customerName === 'FORD') {
                 if (addedItem.id === 'classic') {
                     if (addedItem.numberOfItems >= 4) {
-                        addedItem.numberOfItems = parseFloat(addedItem.numberOfItems)+1;
+                        addedItem.numberOfItems = parseFloat(addedItem.numberOfItems) + 1;
                         totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
                         addedItem.discountApplied = true;
                     }
                 }
                 if (addedItem.id === 'standout') {
-                    addedItem.price = 309.99; 
-                    totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price); 
+                    addedItem.price = 309.99;
+                    totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
                     addedItem.discountApplied = true;
                 }
                 if (addedItem.id === 'premium') {
                     if (addedItem.numberOfItems >= 3) {
                         addedItem.numberOfItems = parseFloat(addedItem.numberOfItems);
-                        addedItem.price = 389.99; 
+                        addedItem.price = 389.99;
                         totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
                         addedItem.discountApplied = true;
                     }
                 }
             }
-            
+
             totalPrice = totalPrice === addedItem.totalPrice ? parseFloat($scope.numberOfItems) * parseFloat(addedItem.price) : totalPrice;
             return totalPrice;
         }
+
+    }
+
+    function removeItem(item) {
+        $scope.totalAddedItems.forEach(function (addedItem, index) {
+            if (addedItem.name === item.name) {
+                $scope.totalAddedItems.splice(index, 1);
+                calculateTotalCheckoutValue();
+            }
+        });
     }
 });
 

@@ -23,7 +23,7 @@
   <div class="container topmargin">
       <div class="col-md-12">
           <div class="panel panel-info">
-            <div class="panel-heading">Checkout summery <span class="pull-right">Total : {{totalCheckoutValue}}</span></div>
+            <div class="panel-heading">Checkout summery <span class="pull-right"><strong>Total : ${{totalCheckoutValue}}</strong></span></div>
                 <div class="panel-body">
                     <div class="col-md-4">
                         <form>
@@ -64,12 +64,12 @@
                                 <tbody>
                                     <tr ng-repeat="item in totalAddedItems">
                                         <td>{{ item.name }}</td>
-                                        <td>{{ item.price }}</td>
+                                        <td>${{ item.price }}</td>
                                         <td>{{ item.numberOfItems }}</td>
-                                        <td>{{ item.totalPrice }}</td>
+                                        <td>${{ item.totalPrice }}</td>
                                         <td ng-if="item.discountApplied"><span class="label label-success">Yes</span></td>
                                         <td ng-if="!item.discountApplied"><span class="label label-default">No</span></td>
-                                        <td><a href="#" class="btn btn-xs btn-danger" ng-click="remove(item)">Delete</a></td>
+                                        <td><a href="#" class="btn btn-xs btn-danger" ng-click="removeItem(item)">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>
