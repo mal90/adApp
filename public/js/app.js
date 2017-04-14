@@ -51,14 +51,12 @@ app.controller("checkoutCtrl", function ($scope, $http) {
     }
 
     function addItem() {
-        var overwritten;
 
         if (isNaN($scope.numberOfItems)) {
             alert("Count should be a valid number");
             return false;
         }
 
-        overwritten = false;
         $scope.totalAddedItems.forEach(function (addedItem, index) {
             if ($scope.selectedProduct != undefined && $scope.selectedProduct != null &&
                 addedItem.name === $scope.selectedProduct.name) {
@@ -183,8 +181,9 @@ app.controller("productCtrl", function ($scope, $http) {
             success(function (data) {
                 console.log("product added successfully");
                 getAllProducts();
+                alert("Product added successfully");
             }).error(function (data) {
-                alert("Product id is mandatory!");
+                alert("Something went wrong while adding the product");
                 console.error("error in adding product");
             })
     }
