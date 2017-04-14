@@ -105,10 +105,21 @@ app.controller("checkoutCtrl", function ($scope, $http) {
                 }
             }
             else if ($scope.customerName === 'APPLE') {
-
+                if (addedItem.id === 'standout') {
+                   addedItem.price = 299.99; 
+                   totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price); 
+                   addedItem.discountApplied = true;
+                }
             }
             else if ($scope.customerName === 'NIKE') {
-
+                if (addedItem.id === 'premium') {
+                    if (addedItem.numberOfItems >= 4) {
+                        addedItem.numberOfItems = parseFloat(addedItem.numberOfItems);
+                        addedItem.price = 379.99; 
+                        totalPrice = parseFloat($scope.numberOfItems) * parseFloat(addedItem.price);
+                        addedItem.discountApplied = true;
+                    }
+                }
             }
             else if ($scope.customerName === 'FORD') {
 
