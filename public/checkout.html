@@ -25,7 +25,7 @@
           <div class="panel panel-info">
             <div class="panel-heading">Checkout summery</div>
                 <div class="panel-body">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <form>
                             <div class="col-md-12 field-inline">
                                 <div class="form-group">
@@ -48,21 +48,26 @@
                             <button ng-click="addItem()" class="btn btn-default">Add</button>
                         </form>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="list-table">
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th>Ad Type</th>
+                                    <th>No.of Items</th>
                                     <th>Total Price</th>
+                                    <th>Discount applied</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="item in totalAddedItems">
                                         <td>{{ item.name }}</td>
-                                        <td>{{ item.price }}</td>
-                                        <td><a href="#" class="btn btn-danger" ng-click="remove(item)">Delete</a></td>
+                                        <td>{{ item.numberOfItems }}</td>
+                                        <td>{{ item.totalPrice }}</td>
+                                        <td ng-if="item.discountApplied"><span class="label label-success">Yes</span></td>
+                                        <td ng-if="!item.discountApplied"><span class="label label-default">No</span></td>
+                                        <td><a href="#" class="btn btn-sm btn-danger" ng-click="remove(item)">Delete</a></td>
                                     </tr>
                                 </tbody>
                             </table>

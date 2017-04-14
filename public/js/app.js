@@ -14,7 +14,7 @@ app.controller("dashboardCtrl", function($scope) {
 });
 
 app.controller("checkoutCtrl", function($scope,$http) {
-    $scope.customers = ['Default','Unilever','Apple','Nike'];
+    $scope.customers = ['Default','UNILEVER','APPLE','NIKE','FORD'];
     $scope.adTypes = [];
     $scope.addItem = addItem;
     $scope.totalAddedItems = [];
@@ -42,7 +42,7 @@ app.controller("checkoutCtrl", function($scope,$http) {
     
     function calculateTotal(){
         var addedItem = {};
-        if($scope.numberOfItems === NaN){
+        if(isNaN($scope.numberOfItems)){
             alert("Count should be a valid number");
             return false;
         }
@@ -52,16 +52,62 @@ app.controller("checkoutCtrl", function($scope,$http) {
             if($scope.selectedProduct != undefined && $scope.selectedProduct!= null && 
                 addedItem.name === $scope.selectedProduct.name){
                 addedItem.numberOfItems =  parseInt(addedItem.numberOfItems) + parseInt($scope.numberOfItems) ;
-                addedItem.price = parseInt(addedItem.numberOfItems) * parseInt($scope.selectedProduct.price) ;   
+                addItem.discountApplied = false ;
+                addedItem.totalPrice = discountLogic(addedItem) ;   
                 itemExists = true;
             }
         });
 
         if(!itemExists){
             addedItem.name = $scope.selectedProduct.name;
+            addedItem.id = $scope.selectedProduct.id;
+            addedItem.price = $scope.selectedProduct.price;
             addedItem.numberOfItems = $scope.numberOfItems;
-            addedItem.price = parseInt($scope.numberOfItems) * parseInt($scope.selectedProduct.price);
+            addItem.discountApplied = false ;
+            addedItem.totalPrice = discountLogic(addedItem);
             $scope.totalAddedItems.push(addedItem);
+        }
+
+        function discountLogic(addedItem){
+            var totalPrice = addedItem.totalPrice;
+            if(!addedItem.discountApplied)
+            {
+                if($scope.customerName === "UNILEVER"){
+                    if(addedItem.id === 'classic'){
+                        if(addedItem.numberOfItems >= 2){
+                            addedItem.numberOfItems = parseInt(addedItem.numberOfItems)+1;
+                            totalPrice = parseInt(addedItem.numberOfItems) * parseInt(addedItem.price);
+                            addedItem.discountApplied = true;
+                        }
+                    }
+                }
+                else if($scope.customerName === 'APPLE'){
+
+                }
+                else if($scope.customerName === 'NIKE'){
+
+                }
+                else if($scope.customerName === 'FORD'){
+
+                }
+                else{
+
+                }
+
+                totalPrice = totalPrice === addedItem.totalPrice ? parseInt(addedItem.numberOfItems) * parseInt(addedItem.price) : totalPrice ;
+                return totalPrice ;
+            }
+            else{
+                if($scope.customerName === "UNILEVER"){
+                    if(addedItem.id === 'classic'){
+                        totalPrice = parseInt(addedItem.numberOfItems) * parseInt(addedItem.price);
+                        addedItem.discountApplied = true;
+                    }
+                }
+
+                totalPrice = totalPrice === addedItem.totalPrice ? parseInt(addedItem.numberOfItems) * parseInt(addedItem.price) : totalPrice ;
+                return totalPrice ;
+            }
         }
     }
 });
