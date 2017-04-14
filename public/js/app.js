@@ -1,15 +1,69 @@
 var app = angular.module("adApp", []); 
 
 app.controller("dashboardCtrl", function($scope) {
-    $scope.gotToAddProduct = gotToAddProduct;
+    $scope.goToAdProduct = goToAdProduct;
+    $scope.goToAdCheckout = goToAdCheckout;
 
-    function gotToAddProduct(){
+    function goToAdProduct(){
         window.location = '../products.html';
+    }
+
+    function goToAdCheckout(){
+        window.location = '../checkout.html';
     }
 });
 
-app.controller("quoteCtrl", function($scope) {
+app.controller("checkoutCtrl", function($scope,$http) {
+    $scope.customers = ['Default','Unilever','Apple','Nike'];
+    $scope.adTypes = [];
+    $scope.addItem = addItem;
+    $scope.totalAddedItems = [];
+    getAllProducts();
 
+    function getAllProducts(){
+        $http.get('/products').
+        success(function(data) {
+            $scope.products = data ;
+            getAllAdTypes(data);
+        }).error(function(data) {
+            console.error("error pccured");
+        })
+    }
+
+    function getAllAdTypes(products){
+        products.forEach(function(product) {
+            $scope.adTypes.push(product.name);
+        });
+    }
+
+    function addItem(){
+        calculateTotal();
+    }
+    
+    function calculateTotal(){
+        var addedItem = {};
+        if($scope.numberOfItems === NaN){
+            alert("Count should be a valid number");
+            return false;
+        }
+
+        var itemExists = false ;
+        $scope.totalAddedItems.forEach(function(addedItem) {
+            if($scope.selectedProduct != undefined && $scope.selectedProduct!= null && 
+                addedItem.name === $scope.selectedProduct.name){
+                addedItem.numberOfItems =  parseInt(addedItem.numberOfItems) + parseInt($scope.numberOfItems) ;
+                addedItem.price = parseInt(addedItem.numberOfItems) * parseInt($scope.selectedProduct.price) ;   
+                itemExists = true;
+            }
+        });
+
+        if(!itemExists){
+            addedItem.name = $scope.selectedProduct.name;
+            addedItem.numberOfItems = $scope.numberOfItems;
+            addedItem.price = parseInt($scope.numberOfItems) * parseInt($scope.selectedProduct.price);
+            $scope.totalAddedItems.push(addedItem);
+        }
+    }
 });
 
 app.controller("productCtrl", function($scope, $http) {

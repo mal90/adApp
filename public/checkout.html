@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>adApp</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .topmargin{
+            margin-top: 50px;
+        }
+
+        .field-inline{
+            padding-left: 0px; 
+        }
+
+        .list-table{
+            max-height: 250px;
+            overflow-y: scroll;
+        }
+    </style>    
+</head>
+<body ng-app="adApp" ng-controller="checkoutCtrl">
+  <div class="container topmargin">
+      <div class="col-md-12">
+          <div class="panel panel-info">
+            <div class="panel-heading">Checkout summery</div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <form>
+                            <div class="col-md-12 field-inline">
+                                <div class="form-group">
+                                    <label for="customer">Customer:</label>
+                                    <select class="form-control" ng-model="customerName" ng-options="customer for customer in customers"></select>
+                                </div>
+                            </div>    
+                            <div class="col-md-10 field-inline">
+                                <div class="form-group">
+                                    <label for="ad">Type of Ad:</label>
+                                    <select class="form-control" ng-model="selectedProduct" ng-options="product.name for product in products"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-2 field-inline">
+                                <div class="form-group">
+                                    <label for="ad">Count:</label>
+                                    <input type="text" ng-model="numberOfItems" class="form-control" id="ad" name="ad">
+                                </div>
+                            </div>    
+                            <button ng-click="addItem()" class="btn btn-default">Add</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="list-table">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Ad Type</th>
+                                    <th>Total Price</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in totalAddedItems">
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.price }}</td>
+                                        <td><a href="#" class="btn btn-danger" ng-click="remove(item)">Delete</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+      </div>
+  </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
