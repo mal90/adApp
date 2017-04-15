@@ -27,17 +27,6 @@ MongoClient.connect(URL, (err, database) => {
   })
 })
 
-
-// app.get('/', (req, res) => {
-//   console.log("directory " + __dirname);
-//   //res.sendFile(__dirname+'/index.html')
-// })
-
-app.post('/quote/add', (req, res) => {
-  console.log(req.body);
-  res.end();
-})
-
 app.get('/products', (req, res) => {
     db.collection('products').find().toArray(function(err, results) {
     console.log(results)
