@@ -3,18 +3,20 @@
 
     angular.module('adApp').controller('checkoutCtrl', checkoutCtrl);
 
-    checkoutCtrl.$inject = ['$scope', 'productsService'];
+    checkoutCtrl.$inject = ['$scope', 'productsService','Notification'];
 
-    function checkoutCtrl($scope, productsService) {
+    function checkoutCtrl($scope, productsService,Notification) {
         $scope.customers = ['Default', 'UNILEVER', 'APPLE', 'NIKE', 'FORD'];
         $scope.adTypes = [];
         $scope.addItem = addItem;
         $scope.changeCustomer = changeCustomer;
         $scope.removeItem = removeItem;
         $scope.totalAddedItems = [];
-        var customerSelected;
-        getAllProducts();
+        $scope.goToDashboard = goToDashboard;
         $scope.totalCheckoutValue = 0;
+        var customerSelected;
+
+        getAllProducts();//initialize products
 
         function getAllProducts() {
             productsService.getAllProducts()
@@ -33,6 +35,7 @@
         }
 
         function changeCustomer() {
+            /** If the user change the 'selected' customer */
             if (customerSelected != undefined && customerSelected != $scope.customerName) {
                 var confirmChange = confirm("You will lose your current customer info ! Click OK to proceed");
                 if (confirmChange) {
@@ -44,9 +47,8 @@
         }
 
         function addItem() {
-
             if (isNaN($scope.numberOfItems)) {
-                alert("Count should be a valid number");
+                Notification({ message: 'Count should be a valid number', title: 'Count value is not a number' }, 'warning');
                 return false;
             }
 
@@ -56,9 +58,9 @@
                     addedItem.name === $scope.selectedProduct.name) {
                     var confirmOverWright = confirm("Do you want to overwright the current entry under the same Ad type ? Click OK to proceed");
                     if (confirmOverWright) {
-                        $scope.totalAddedItems.splice(index, 1);
+                        $scope.totalAddedItems.splice(index, 1); //User overwrite an existing ad
                     } else {
-                        dublicateItem = true;
+                        dublicateItem = true; //User choose not add an advertisment which is allready added
                     }
                 }
             });
@@ -77,6 +79,7 @@
             addedItem.discountApplied = false;
             addedItem.totalPrice = discountLogic(addedItem);
             $scope.totalAddedItems.push(addedItem);
+            Notification({ message: 'Item added to checkout list', title: 'Item Added' }, 'success');
             calculateTotalCheckoutValue();
         }
 
@@ -139,7 +142,8 @@
                     }
                 }
 
-                totalPrice = totalPrice === addedItem.totalPrice ? parseFloat($scope.numberOfItems) * parseFloat(addedItem.price) : totalPrice;
+                totalPrice = totalPrice === addedItem.totalPrice ?
+                    parseFloat($scope.numberOfItems) * parseFloat(addedItem.price) : totalPrice;
                 return totalPrice;
             }
 
@@ -149,9 +153,14 @@
             $scope.totalAddedItems.forEach(function (addedItem, index) {
                 if (addedItem.name === item.name) {
                     $scope.totalAddedItems.splice(index, 1);
-                    calculateTotalCheckoutValue();
+                    Notification({ message: 'Item removed from checkout list', title: 'Item Removed' }, 'success');
+                    calculateTotalCheckoutValue();//Update the total after removing an item
                 }
             });
+        }
+
+        function goToDashboard() {
+            window.location = '/';
         }
     }
 

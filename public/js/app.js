@@ -1,1 +1,1 @@
-var app = angular.module("adApp", []);
+var app = angular.module("adApp", ['ui-notification']);
