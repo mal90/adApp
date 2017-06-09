@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>adApp</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-notification/0.3.6/angular-ui-notification.min.css">
     <style>
         .topmargin {
             margin-top: 50px;
@@ -13,8 +12,8 @@
     </style>
 </head>
 
-<body ng-app="adApp" ng-controller="dashboardCtrl">
-    <div class="container topmargin">
+<body >
+    <div class="container topmargin" id="events">
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">Dashboard</div>
@@ -23,8 +22,10 @@
                     </div>
                     <div class="col-md-4">
                         <div class="btn-group">
-                            <button type="button" ng-click="goToAdProduct()" class="btn btn-primary">Manage Products</button>
-                            <button type="button" ng-click="goToAdCheckout()" class="btn btn-success">Checkout</button>
+                            <button type="button"  class="btn btn-primary">Manage Products</button>
+                            <button type="button"  class="btn btn-success">Checkout</button>
+                            <button type="button"  class="btn btn-success">{{event.name}}</button>
+                            <input class="form-control" placeholder="What i want to do" v-model="event.name">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -35,10 +36,8 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-notification/0.3.6/angular-ui-notification.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/controllers/dashboard.controller.js"></script>
-</body>
+    <script src="https://unpkg.com/vue@2.3.4"></script>
+    <script src="js/vue/dashboard.js"></script>
 
+</body>
 </html>
