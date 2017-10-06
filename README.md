@@ -1,5 +1,5 @@
 # adApp
-adApp using node , expressJS , mongo , angular , bootsrap
+A simple advertisement CRUD application using MEAN stack + bootsrap (currently trying migrate from AngularJs to Vue)
 
 How to Run App
 --------------
