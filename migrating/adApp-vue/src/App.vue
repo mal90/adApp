@@ -1,5 +1,5 @@
 <template>
-  <div class="container topmargin" id="dashboard">
+  <div class="container topmargin" id="app">
         <div class="col-md-12">
             <div class="panel panel-info">
                 <div class="panel-heading">Dashboard</div>
@@ -8,6 +8,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="btn-group">
+                            <router-link v-bind:to="'/'">Home</router-link>
                             <button type="button" class="btn btn-primary">Manage Products</button>
                             <button type="button" class="btn btn-success">Checkout</button>
                         </div>
