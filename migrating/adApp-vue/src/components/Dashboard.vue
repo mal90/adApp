@@ -8,8 +8,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-primary">Manage Products</button>
-                            <button type="button" class="btn btn-success">Checkout</button>
+                            <router-link type="button" class="btn btn-primary" v-bind:to="'/'">Home</router-link>
+                            <router-link type="button" class="btn btn-success" v-bind:to="'/products'">Products</router-link>
                         </div>
                     </div>
                     <div class="col-md-4">

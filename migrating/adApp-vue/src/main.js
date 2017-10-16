@@ -11,7 +11,8 @@ import Dashboard from './components/Dashboard.vue'
 
 const routes = [
 	//route for the home route of the webpage
-  { path: '/', component: Dashboard }
+  { path: '/', component: Dashboard },
+  { path: '/products', component: Products }
 ]
 
 const router = new VueRouter({
