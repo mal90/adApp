@@ -6,10 +6,12 @@ Vue.use(VueRouter)
 
 
 import Products from './components/Products.vue'
+import Dashboard from './components/Dashboard.vue'
+
 
 const routes = [
 	//route for the home route of the webpage
-  { path: '/', component: Products }
+  { path: '/', component: Dashboard }
 ]
 
 const router = new VueRouter({
