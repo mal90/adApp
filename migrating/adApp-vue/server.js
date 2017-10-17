@@ -4,7 +4,7 @@ const mongodb = require('mongodb');
 const bodyParser= require('body-parser');
 const app = express();
 var db;
-var CONFIG = require('./public/config.json');
+//var CONFIG = require('./public/config.json');
 
 
 //var userName = CONFIG.uname;
@@ -12,7 +12,7 @@ var CONFIG = require('./public/config.json');
 //var dbName = CONFIG.dbname;
 
 
-//var URL='mongodb://localhost:27017'+'adApp';
+var URL='mongodb://localhost:27017/'+'adApp';
 console.log(URL);
 
 app.use(express.static(__dirname + '/public'));
