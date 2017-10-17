@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import resources from 'vue-resource'
+
 
 Vue.use(VueRouter)
+Vue.use(resources)
+
 
 
 import Products from './components/Products.vue'
