@@ -23,8 +23,9 @@
                             <div>
                                 <button type="submit" class="btn btn-success">Add/Update product</button>
                                 <button class="btn btn-warning pull-right">Clear</button>
-                            </div>
+                            </div>                           
                         </form>
+                        <button v-on:click="get">Call Server</button>
                     </div>
                     <div class="col-md-6">
                         <div class="list-table">
@@ -38,7 +39,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="product in products">
+                                <tr>
                                     <td>{{  }}</td>
                                     <td>{{  }}</td>
                                     <td>${{  }}</td>
@@ -56,8 +57,22 @@
 
 <script>
 export default {
-  name: 'Products'
+  name: 'Products',
+  methods: {
+        get: function() {
+            // GET request
+            this.$http({
+                url: '/products',
+                method: 'GET'
+            }).then(function(response) {
+                console.log('ok');
+            }, function(response) {
+                console.log('failed');
+            });
+        }
+    }
 }
+
 </script>
 
 <style>
