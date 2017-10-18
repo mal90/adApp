@@ -62,7 +62,7 @@ export default {
         get: function() {
             // GET request
             this.$http({
-                url: '/products',
+                url: '/api/products',
                 method: 'GET'
             }).then(function(response) {
                 console.log('ok');
