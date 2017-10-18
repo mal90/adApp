@@ -42,7 +42,7 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
      proxy: {
-       "/api/*": "http://localhost:3000/api/"
+       "/api": "http://localhost:3000"
      }
   },
   performance: {
