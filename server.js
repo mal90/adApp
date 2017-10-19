@@ -4,14 +4,15 @@ const mongodb = require('mongodb');
 const bodyParser= require('body-parser');
 const app = express();
 var db;
-var CONFIG = require('./public/config.json');
+//var CONFIG = require('./public/config.json');
 
 
-var userName = CONFIG.uname;
-var passWord = CONFIG.pword;
-var dbName = CONFIG.dbname;
+//var userName = CONFIG.uname;
+//var passWord = CONFIG.pword;
+//var dbName = CONFIG.dbname;
 
-var URL='mongodb://'+userName+':'+passWord+'@ds161190.mlab.com:61190/'+dbName;
+
+var URL='mongodb://localhost:27017/'+'adApp';
 console.log(URL);
 
 app.use(express.static(__dirname + '/public'));
@@ -27,7 +28,7 @@ MongoClient.connect(URL, (err, database) => {
   })
 })
 
-app.get('/products', (req, res) => {
+app.get('/api/products', (req, res) => {
     db.collection('products').find().toArray(function(err, results) {
     console.log(results)
     res.setHeader('Content-Type', 'application/json');
@@ -35,7 +36,7 @@ app.get('/products', (req, res) => {
     })
 })
 
-app.post('/product/add', (req, res) => {
+app.post('/api/product/add', (req, res) => {
     db.collection('products').find({id:req.body.id}).toArray(function(err, result) {
         console.log(result);
         if(result.length == 0){
