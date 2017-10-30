@@ -15,7 +15,7 @@ var db;
 var URL='mongodb://localhost:27017/'+'adApp';
 console.log(URL);
 
-app.use(express.static(__dirname + '/public'));
+app.use('/',express.static(__dirname));
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
