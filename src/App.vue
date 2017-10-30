@@ -17,3 +17,7 @@ export default {
 </script>
 
 <style>
+    .topmargin {
+        margin-top: 50px;
+    }
+</style>
